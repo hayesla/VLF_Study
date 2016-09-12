@@ -8,7 +8,7 @@ import datetime
 import os
 
 # directory where files are stored
-dir_path = '~/QPPs/sid/july_event/VLF_Study/files_rus/'
+dir_path = '/home/laura/QPP/sid/july_event/VLF_Study/MSK_data/files_rus/'
 
 #----------------------------------------------------#
 # function to read in data and output name of station,
