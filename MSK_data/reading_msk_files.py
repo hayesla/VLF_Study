@@ -8,7 +8,7 @@ import datetime
 import os
 
 # directory where files are stored
-dir_path = '/Users/laura/Documents/QPPs/sid/july_flare/RozhnoiData24072016/files_rus/'
+dir_path = '/home/laura/QPP/sid/july_event/VLF_Study/MSK_data/files_rus/'
 
 #----------------------------------------------------#
 # function to read in data and output name of station,
@@ -43,7 +43,8 @@ def read_files(name, t_start, t_end):
 
 	t= np.array(floatify(t))
 	a = np.array(floatify(a))
-	p = np.array(floatify(p))
+	ph = np.array(floatify(p))
+	p = np.unwrap(ph)
 
 	new_time = []
 	for i in range(0, len(t)):
