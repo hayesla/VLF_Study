@@ -15,6 +15,8 @@ dir_path = '/Users/laura/Documents/QPPs/sid/july_flare/RozhnoiData24072016/files
 # time frame, pandas Series for amplitude  and phase 
 # input is name of file
 #----------------------------------------------------#
+
+'''test'''
 def read_files(name, t_start, t_end):
 
 	f = open(os.path.join(dir_path,name))
