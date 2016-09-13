@@ -41,7 +41,8 @@ def read_files(name, t_start, t_end):
 
 	t= np.array(floatify(t))
 	a = np.array(floatify(a))
-	p = np.array(floatify(p))
+	ph = np.array(floatify(p))
+	p = np.unwrap(ph)
 
 	new_time = []
 	for i in range(0, len(t)):
