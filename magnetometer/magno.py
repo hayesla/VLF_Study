@@ -60,10 +60,16 @@ h = np.sqrt(np.array(bx)**2 + np.array(by)**2)
 H = Series(h, index = times)
 H_tr = H.truncate(t_start, t_end)
 
+H = H.resample('1min', how = 'mean')
 
 BX = Series(bx, index = times).truncate(t_start, t_end)
 BY = Series(by, index = times).truncate(t_start, t_end)
 BZ = Series(bz, index = times).truncate(t_start, t_end)
+
+BX = BX.resample('1min', how = 'mean')
+BY = BY.resample('1min', how = 'mean')
+BZ = BZ.resample('1min', how = 'mean')
+
 
 
 def normalise(x): #Function to normalise data
@@ -90,6 +96,7 @@ def make_sid_series(file_name):
 
 sid_dataa = make_sid_series('BIR_sid_20160724_000000.txt')
 
+'''
 
 fig, ax = plt.subplots(3, sharex = True, figsize = (18, 15))
 ax[0].plot(H.index.to_pydatetime(), H, sns.xkcd_rgb["pale red"])
@@ -130,7 +137,7 @@ ax[2].axvline(t_end)
 plt.tight_layout()
 
 
-
+'''
 
 
 
@@ -159,7 +166,7 @@ ax[1].axvline(t_end)
 plt.tight_layout()
 
 '''
-'''
+
 fig, ax = plt.subplots(3, sharex = True, figsize = (18, 15))
 ax[0].plot(BX.index.to_pydatetime(), BX, sns.xkcd_rgb["pale red"])
 ax[0].set_ylabel('Bx (nT)', fontsize = 20)
@@ -193,8 +200,7 @@ ax[2].axvline(t_end)
 plt.tight_layout()
 plt.ion()
 
-'''
-
+plt.tight_layout()
 
 
 
