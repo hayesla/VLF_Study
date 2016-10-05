@@ -56,7 +56,9 @@ for i in range(len(date)):
 	aia_data_float.append(float(data_aia[i]))
 
 aia_lc = Series(aia_data_float, index = aia_index)
-aia_lc.truncate(t_start, t_end)
+aia_lc = aia_lc.truncate(t_start, t_end)
+
+'''
 #ESP DATA#
 data_table, header_table = fits.getdata('esp_L1_2016206_005.fit', 1, header = True)
 
@@ -65,6 +67,7 @@ doy = data_table.field('doy')
 hour = data_table.field('hour')
 minute = data_table.field('minute')
 sec = data_table.field('sec')
+
 
 time_frame = []
 for i in range(len(year)):
@@ -87,36 +90,78 @@ cha30 = Series(channel30, index = time_frame)
 cha30 = cha30.truncate(t_start, t_end)
 cha36 = Series(channel36, index = time_frame)
 cha36 = cha36.truncate(t_start, t_end)
-
+'''
 import seaborn as sns
 sns.set_style('ticks',{'xtick.direction':'in','ytick.direction':'in'})
 sns.set_context('paper')
 
-fig, ax = plt.subplots(2,sharex = True)
+plot_goes_sid = False
+if plot_goes_sid:
+        fig, ax = plt.subplots(2,sharex = True, figsize = (10,15))
 
-ax[0].plot(sid_dataa.index.to_pydatetime(), sid_dataa, color =  sns.xkcd_rgb["pale red"], label = 'BIRR VLF')
-ax[0].plot(sid_dataa.index, smooth(sid_dataa, 120), color = 'k', lw = 2, label = 'Smoothed BIRR VLF')
-#ax[0].axvline('2016-02-13 15:24:28', linestyle = 'dashed', color = 'gray')
-#ax[0].axvline('2016-02-13 15:28:30', linestyle = 'dashed', color = 'gray')
-#ax[0].axvline('2016-02-13 15:32:08', linestyle = 'dashed', color = 'gray')
-ax[0].tick_params(which = 'both', labelsize = 10)
-ax[0].legend(loc = 'upper left', fontsize = 10)
-ax[0].set_ylabel('Volts', fontsize = 15)
-ax[0].set_title('July Flares BIRR SID and GOES', fontsize = 15)
-ax[0].xaxis.set_major_locator(dates.HourLocator(interval =1))
-ax[0].xaxis.set_major_formatter(dates.DateFormatter('%H.%M'))
-ax[0].xaxis.grid(True, which="major")
-ax[1].plot(gl.index.to_pydatetime(), (gl), label = 'GOES 1-8 $\mathrm{\AA}$')
-ax[1].plot(gs.index, (gs), label = 'GOES 0.4-5 $\mathrm{\AA}$')
-ax[1].legend(loc = 'upper left', fontsize = 10)
-ax[1].xaxis.set_major_locator(dates.HourLocator(interval =1))
-ax[1].xaxis.set_major_formatter(dates.DateFormatter('%H.%M'))
-ax[1].xaxis.grid(True, which="major")
-#ax[1].plot(gbm.data.index, normalise(gbm.data['4-15 keV']))
-#ax[1].plot(gbm.data.index, normalise(gbm.data['15-25 keV']))
-#ax[1].axvline('2016-02-13 15:24:28', linestyle = 'dashed', color = 'gray')
-#ax[1].axvline('2016-02-13 15:28:30', linestyle = 'dashed', color = 'gray')
-#ax[1].axvline('2016-02-13 15:32:08', linestyle = 'dashed', color = 'gray')
-ax[1].tick_params(which = 'both', labelsize = 10)
-ax[1].set_ylabel('Flux', fontsize = 15)
-ax[1].set_xlabel('Start time: '+t_start, fontsize = 15)
+        ax[0].plot(sid_dataa.index.to_pydatetime(), sid_dataa, color =  sns.xkcd_rgb["pale red"], label = 'BIRR VLF')
+        ax[0].plot(sid_dataa.index, smooth(sid_dataa, 120), color = 'k', lw = 2, label = 'Smoothed BIRR VLF')
+        ax[0].tick_params(which = 'both', labelsize = 10)
+        ax[0].legend(loc = 'upper left', fontsize = 15)
+        ax[0].set_ylabel('Volts', fontsize = 15)
+
+
+
+
+        ax[0].set_title('July Flares BIRR SID and GOES', fontsize = 15)
+        ax[0].xaxis.set_major_locator(dates.MinuteLocator(interval =30))
+        ax[0].xaxis.set_major_formatter(dates.DateFormatter('%H.%M'))
+        ax[0].xaxis.grid(True, which="major")
+
+        ax[1].plot(gl.index.to_pydatetime(), (gl), label = 'GOES 1-8 $\mathrm{\AA}$')
+        ax[1].plot(gs.index, (gs), label = 'GOES 0.4-5 $\mathrm{\AA}$')
+        ax[1].legend(loc = 'upper left', fontsize = 15)
+        ax[1].xaxis.set_major_locator(dates.MinuteLocator(interval =30))
+        ax[1].xaxis.set_major_formatter(dates.DateFormatter('%H.%M'))
+        ax[1].xaxis.grid(True, which="major")
+        ax[1].tick_params(which = 'both', labelsize = 10)
+        ax[1].set_ylabel('Flux', fontsize = 15)
+        ax[1].set_xlabel('Start time: '+t_start, fontsize = 15)
+
+        plt.tight_layout()
+
+plot_all = True
+if plot_all:
+        fig, ax = plt.subplots(3,sharex = True, figsize = (10,20))
+
+        ax[0].plot(sid_dataa.index.to_pydatetime(), sid_dataa, color =  sns.xkcd_rgb["pale red"], label = 'BIRR VLF')
+        ax[0].plot(sid_dataa.index, smooth(sid_dataa, 120), color = 'k', lw = 2, label = 'Smoothed BIRR VLF')
+        ax[0].tick_params(which = 'both', labelsize = 10)
+        ax[0].legend(loc = 'upper left', fontsize = 15)
+        ax[0].set_ylabel('Volts', fontsize = 15)
+
+
+
+
+        ax[0].set_title('July Flares BIRR SID, GOES, AIA', fontsize = 15)
+        ax[0].xaxis.set_major_locator(dates.MinuteLocator(interval =30))
+        ax[0].xaxis.set_major_formatter(dates.DateFormatter('%H.%M'))
+        ax[0].xaxis.grid(True, which="major")
+
+        ax[1].plot(gl.index.to_pydatetime(), (gl), label = 'GOES 1-8 $\mathrm{\AA}$')
+        ax[1].plot(gs.index, (gs), label = 'GOES 0.4-5 $\mathrm{\AA}$')
+        ax[1].legend(loc = 'upper left', fontsize = 15)
+        ax[1].xaxis.set_major_locator(dates.MinuteLocator(interval =30))
+        ax[1].xaxis.set_major_formatter(dates.DateFormatter('%H.%M'))
+        ax[1].xaxis.grid(True, which="major")
+        ax[1].tick_params(which = 'both', labelsize = 10)
+        ax[1].set_ylabel('Flux', fontsize = 15)
+       
+
+
+        ax[2].plot(aia_lc.index.to_pydatetime(), (aia_lc), label = 'AIA 131 $\mathrm{\AA}$', color = 'black')
+        ax[2].legend(loc = 'upper left', fontsize = 15)
+        ax[2].xaxis.set_major_locator(dates.MinuteLocator(interval =30))
+        ax[2].xaxis.set_major_formatter(dates.DateFormatter('%H.%M'))
+        ax[2].xaxis.grid(True, which="major")
+        ax[2].tick_params(which = 'both', labelsize = 10)
+        ax[2].set_ylabel('Count Rate (DN/s)', fontsize = 15)
+        ax[2].set_xlabel('Start time: '+t_start, fontsize = 15)
+
+
+        plt.tight_layout()
