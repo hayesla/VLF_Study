@@ -12,10 +12,7 @@ from scipy import ndimage
 smooth = ndimage.filters.uniform_filter
 from sunpy import lightcurve as lc
 from astropy.io import fits
-'''
-    timey = read_csv('goes_list_day_x.csv')
-    start_times = timey['start_time']
-    end_times = timey['end_time']'''
+
 
 t_start = '2016-07-24 11:25'
 t_end = '2016-07-24 15:00'

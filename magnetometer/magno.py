@@ -59,7 +59,7 @@ bz = floatify(bz)
 h = np.sqrt(np.array(bx)**2 + np.array(by)**2)
 H = Series(h, index = times)
 H_tr = H.truncate(t_start, t_end)
-
+H = H.resample('1min', how = 'mean')
 
 BX = Series(bx, index = times).truncate(t_start, t_end)
 BY = Series(by, index = times).truncate(t_start, t_end)
@@ -129,7 +129,7 @@ ax[2].axvline(t_end)
 
 plt.tight_layout()
 
-
+plt.savefig('min_deriv_birr.png')
 
 
 

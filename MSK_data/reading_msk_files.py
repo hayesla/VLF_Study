@@ -8,8 +8,8 @@ import datetime
 import os
 
 # directory where files are stored
-dir_path = '/home/laura/QPP/sid/july_event/VLF_Study/MSK_data/files_rus/'
-
+#dir_path = '/home/laura/QPP/sid/july_event/VLF_Study/MSK_data/files_rus/'
+dir_path = '/Users/laura/Documents/QPPs/sid/july_flare/MSK_data/files_rus/'
 #----------------------------------------------------#
 # function to read in data and output name of station,
 # time frame, pandas Series for amplitude  and phase 

@@ -20,10 +20,10 @@ def normalise(x): #Function to normalise data
 	return (x-np.min(x))/(np.max(x) - np.min(x))
 
 
-station, t, amp, pha = read_files(file_name)
+station, t, amp, pha = read_files(file_name, t_start, t_end)
 
-amp = amp.truncate(t_start, t_end)
-pha = pha.truncate(t_start, t_end)
+'''amp = amp.truncate(t_start, t_end)
+pha = pha.truncate(t_start, t_end)'''
 
 
 
