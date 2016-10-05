@@ -41,7 +41,7 @@ filess = []
 for i in range(len(flatten_times)):
     filess.append('SWX_DRAP20_C_SWPC_20160724'+flatten_times[i]+'_GLOBAL.txt')
 
-dir_path = '/Users/laura/Documents/QPPs/sid/july_flare/d_region/world_plots/SWX_DRAP20_C_SWPC_20160724'
+dir_path = '/home/laura/QPP/sid/july_event/VLF_Study/d_region/SWX_DRAP20_C_SWPC_20160724'
 
 
 
@@ -127,7 +127,7 @@ def reading_files(file_name):
 
 
 
-plotting_path = '/Users/laura/Documents/QPPs/sid/july_flare/d_region/world_plots/python_plots_new/'
+plotting_path = '/home/laura/QPP/sid/july_event/VLF_Study/d_region/world_drap_plots/'
 def plot_map(lats, lons, full_map, plot_all = False, i = 0):
 	fig=plt.figure()
 	m = Basemap(projection = 'cyl', llcrnrlat=-89,urcrnrlat=89, llcrnrlon=-178,urcrnrlon=178, resolution = 'c')
@@ -180,7 +180,7 @@ def plotting_movie(filess, plot_all = False, i = i):
 	###MAP###
 	ax = pylab.axes([0.05, 0.090, 0.60, 0.9])
 	m = Basemap(projection = 'cyl', llcrnrlat=-89,urcrnrlat=89, llcrnrlon=-178,urcrnrlon=178, resolution = 'c')
-	levels = np.arange(0, 20, 0.1)
+	levels = np.arange(0, 35, 0.1)
 	CS2 = m.contourf(lons,lats,full_map,levels,cmap=plt.cm.ocean_r, extend='both',latlon=True)
 	cbar = m.colorbar(CS2,location = 'bottom') 
 	cbar.set_label('Degraded Frequency (MHz)')
